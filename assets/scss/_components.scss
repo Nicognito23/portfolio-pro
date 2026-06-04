@@ -1,0 +1,57 @@
+.portfolio-primary-btn,
+.portfolio-secondary-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 0.72rem 1.1rem;
+}
+
+.portfolio-primary-btn {
+  color: #04111f;
+  background: linear-gradient(90deg, var(--accent), #3db6ff);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.portfolio-primary-btn:hover {
+  color: #04111f;
+  box-shadow: 0 12px 30px rgba(43, 212, 191, 0.28);
+}
+
+.portfolio-secondary-btn {
+  color: #dbe8f8;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.portfolio-secondary-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.portfolio-quote-form-wrap,
+.portfolio-project-card,
+.portfolio-single-project {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  box-shadow: var(--shadow);
+}
+
+a,
+button,
+.elementor-button,
+.wp-element-button {
+  transition: color 0.22s ease, background-color 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+
+.elementor-button,
+.wp-element-button {
+  border-radius: 10px !important;
+}
+
+.elementor-button:hover,
+.wp-element-button:hover {
+  transform: translateY(-2px);
+}

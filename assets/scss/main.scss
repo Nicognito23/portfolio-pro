@@ -1,0 +1,13 @@
+@use "variables";
+@use "base";
+@use "header";
+@use "sections";
+@use "components";
+@use "footer";
+@use "motion";
+
+/*
+ * Base SCSS structure.
+ * Le style actuel reste dans style.css pour garantir le rendu existant.
+ * Utiliser `npm run sass:watch` pour migrer progressivement vers cette architecture.
+ */

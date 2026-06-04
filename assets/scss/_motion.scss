@@ -1,0 +1,30 @@
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js-ready .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+body.is-scrolled .elementor-location-header,
+body.is-scrolled .site-header {
+  backdrop-filter: blur(8px);
+  background: rgba(5, 14, 26, 0.72);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
