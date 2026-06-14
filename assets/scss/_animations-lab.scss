@@ -1,0 +1,729 @@
+@use "sass:map";
+ 
+// =========================================================
+// PAGE ANIMATIONS LAB
+// =========================================================
+ 
+// — Hero
+.anim-hero {
+  max-width: 680px;
+}
+ 
+.anim-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+ 
+.anim-hero-title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-0);
+  line-height: 1.18;
+  margin-bottom: 1.25rem;
+}
+ 
+.anim-hero-accent {
+  color: var(--accent);
+}
+ 
+.anim-hero-desc {
+  font-size: 15px;
+  color: var(--text-1);
+  line-height: 1.75;
+  max-width: 580px;
+}
+ 
+// — Grille 2×3
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+ 
+// — Card démo
+.lab-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+ 
+  &:hover {
+    border-color: rgba(43, 212, 191, 0.25);
+  }
+}
+ 
+.lab-card-demo {
+  height: 180px;
+  background: rgba(6, 14, 26, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+ 
+  &.lab-card-demo--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+ 
+.lab-card-info {
+  padding: 1.25rem 1.5rem;
+}
+ 
+.lab-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+ 
+.lab-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-0);
+}
+ 
+.lab-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 5px;
+  letter-spacing: 0.04em;
+}
+ 
+.lab-tag--js {
+  background: rgba(43, 212, 191, 0.1);
+  border: 1px solid rgba(43, 212, 191, 0.25);
+  color: var(--accent);
+}
+ 
+.lab-tag--scss {
+  background: rgba(79, 124, 255, 0.1);
+  border: 1px solid rgba(79, 124, 255, 0.25);
+  color: var(--accent-2);
+}
+ 
+.lab-card-desc {
+  font-size: 13px;
+  color: var(--text-1);
+  line-height: 1.65;
+ 
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(43, 212, 191, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+}
+ 
+// =========================================================
+// DÉMO 1 — MORPHING TEXT
+// =========================================================
+.morph-wrap {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-0);
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  padding: 0 1rem;
+}
+ 
+.morph-static {
+  color: var(--text-1);
+}
+ 
+.morph-word {
+  color: var(--accent);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+ 
+.morph-word.is-leaving {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+ 
+.morph-word.is-entering {
+  opacity: 0;
+  transform: translateY(10px);
+}
+ 
+// =========================================================
+// DÉMO 2 — MAGNETIC BUTTON
+// =========================================================
+.lab-mag-btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(43, 212, 191, 0.35);
+  background: rgba(43, 212, 191, 0.1);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease;
+  will-change: transform;
+ 
+  &:hover {
+    box-shadow: 0 8px 24px rgba(43, 212, 191, 0.2);
+  }
+}
+ 
+// =========================================================
+// DÉMO 3 — 3D TILT CARD
+// =========================================================
+#lab-tilt-zone {
+  perspective: 700px;
+}
+ 
+.lab-tilt-card {
+  width: 140px;
+  height: 95px;
+  background: linear-gradient(135deg, rgba(13, 26, 43, 0.9), rgba(8, 18, 32, 0.95));
+  border: 1px solid rgba(101, 150, 214, 0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+  transform-style: preserve-3d;
+  cursor: crosshair;
+  will-change: transform;
+}
+ 
+.lab-tilt-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translateZ(20px);
+}
+ 
+.lab-tilt-icon {
+  color: var(--accent);
+  display: flex;
+}
+ 
+.lab-tilt-label {
+  font-size: 11px;
+  color: var(--text-1);
+  white-space: nowrap;
+}
+ 
+// =========================================================
+// DÉMO 4 — COUNTER
+// =========================================================
+.lab-counter-wrap {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+ 
+.lab-counter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+ 
+.lab-counter-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+ 
+.lab-counter-lbl {
+  font-size: 11px;
+  color: var(--text-1);
+  text-align: center;
+  white-space: nowrap;
+}
+ 
+// =========================================================
+// DÉMO 5 — STAGGER REVEAL (pure CSS)
+// =========================================================
+.lab-stagger-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+}
+ 
+.lab-stagger-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: stagger-in 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.14s);
+}
+ 
+@keyframes stagger-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+ 
+.lab-stagger-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+ 
+.lab-stagger-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  display: block;
+  transform-origin: left;
+  animation: stagger-bar-in 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.14s + 0.1s);
+  transform: scaleX(0);
+  opacity: 0;
+}
+ 
+@keyframes stagger-bar-in {
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+ 
+// =========================================================
+// DÉMO 6 — GLITCH EFFECT
+// =========================================================
+.lab-glitch {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-0);
+  position: relative;
+  cursor: default;
+  user-select: none;
+ 
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+ 
+  &::before {
+    color: #ff5f57;
+    animation: glitch-before 4s infinite;
+  }
+ 
+  &::after {
+    color: #2bd4bf;
+    animation: glitch-after 4s infinite;
+  }
+ 
+  &.is-glitching::before { opacity: 1; }
+  &.is-glitching::after  { opacity: 1; }
+}
+ 
+@keyframes glitch-before {
+  0%, 90%, 100% { transform: translate(0); clip-path: none; }
+  92%  { transform: translate(-3px, 1px); clip-path: inset(10% 0 60% 0); }
+  94%  { transform: translate(3px, -1px); clip-path: inset(50% 0 20% 0); }
+  96%  { transform: translate(-2px, 2px); clip-path: inset(30% 0 40% 0); }
+  98%  { transform: translate(0); clip-path: none; }
+}
+ 
+@keyframes glitch-after {
+  0%, 90%, 100% { transform: translate(0); clip-path: none; }
+  93%  { transform: translate(3px, -2px); clip-path: inset(40% 0 30% 0); }
+  95%  { transform: translate(-3px, 1px); clip-path: inset(20% 0 55% 0); }
+  97%  { transform: translate(2px, -1px); clip-path: inset(60% 0 10% 0); }
+  99%  { transform: translate(0); clip-path: none; }
+}
+ 
+// — Responsive
+@media (max-width: 900px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+ 
+// =========================================================
+// BARRE DE CONTRÔLE UNIFIÉE (.lab-ctrl)
+// =========================================================
+.lab-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 36px;
+  gap: 8px;
+}
+ 
+.lab-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+ 
+.lab-hint--auto {
+  color: var(--accent);
+  background: rgba(43, 212, 191, 0.08);
+  border: 1px solid rgba(43, 212, 191, 0.18);
+}
+ 
+.lab-hint--mouse {
+  color: var(--accent-2);
+  background: rgba(79, 124, 255, 0.08);
+  border: 1px solid rgba(79, 124, 255, 0.18);
+}
+ 
+.lab-replay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: var(--text-1);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+ 
+  svg { transition: transform 0.6s ease; }
+ 
+  &:hover {
+    border-color: rgba(43, 212, 191, 0.35);
+    color: var(--accent);
+    background: rgba(43, 212, 191, 0.06);
+  }
+ 
+  &.is-spinning svg { transform: rotate(360deg); }
+}
+ 
+// =========================================================
+// DÉMO 7 — TYPEWRITER
+// =========================================================
+.lab-typewriter-wrap {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 16px;
+  color: var(--text-0);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+ 
+.lab-typewriter-prefix {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 2px;
+}
+ 
+.lab-typewriter-text {
+  color: var(--text-0);
+}
+ 
+.lab-typewriter-cursor {
+  color: var(--accent);
+  font-weight: 300;
+  margin-left: 1px;
+  animation: tw-blink 0.8s step-end infinite;
+}
+ 
+@keyframes tw-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+ 
+// =========================================================
+// DÉMO 8 — LIQUID PROGRESS
+// =========================================================
+.lab-liquid-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 82%;
+}
+ 
+.lab-liquid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.lab-liquid-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-1);
+}
+ 
+.lab-liquid-val {
+  font-weight: 700;
+  color: var(--text-0);
+  font-size: 12px;
+}
+ 
+.lab-liquid-track {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+ 
+.lab-liquid-fill {
+  height: 100%;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transform-origin: left;
+ 
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -10%;
+    width: 120%;
+    height: 18px;
+    border-radius: 40%;
+    animation: liquid-wave 2s ease-in-out infinite;
+    opacity: 0.35;
+  }
+}
+ 
+.lab-liquid-fill--1 {
+  width: 92%;
+  background: linear-gradient(90deg, var(--accent), rgba(43, 212, 191, 0.7));
+  animation: liquid-fill-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+ 
+  &::after {
+    background: var(--accent);
+    animation-delay: 0s;
+  }
+}
+ 
+.lab-liquid-fill--2 {
+  width: 88%;
+  background: linear-gradient(90deg, var(--accent-2), rgba(79, 124, 255, 0.7));
+  animation: liquid-fill-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+ 
+  &::after {
+    background: var(--accent-2);
+    animation-delay: -0.7s;
+  }
+}
+ 
+.lab-liquid-fill--3 {
+  width: 95%;
+  background: linear-gradient(90deg, #5dcaa5, rgba(93, 202, 165, 0.7));
+  animation: liquid-fill-in 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+ 
+  &::after {
+    background: #5dcaa5;
+    animation-delay: -1.2s;
+  }
+}
+ 
+@keyframes liquid-fill-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+ 
+@keyframes liquid-wave {
+  0%   { transform: translateX(0)   rotate(0deg); }
+  50%  { transform: translateX(-5%) rotate(2deg); }
+  100% { transform: translateX(0)   rotate(0deg); }
+}
+// =========================================================
+// HERO TERMINAL (remplace la desc statique)
+// =========================================================
+.anim-hero-terminal {
+  margin-top: 1.5rem;
+  background: rgba(6, 14, 26, 0.85);
+  border: 1px solid rgba(101, 150, 214, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 480px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+ 
+.anim-hero-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+ 
+.anim-hero-terminal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+ 
+  &:nth-child(1) { background: #ff5f57; }
+  &:nth-child(2) { background: #febc2e; }
+  &:nth-child(3) { background: #28c840; }
+}
+ 
+.anim-hero-terminal-body {
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+ 
+.anim-hero-terminal-prefix {
+  color: #546e8a;
+  margin-right: 2px;
+}
+ 
+#anim-hero-terminal-text {
+  color: var(--text-0);
+}
+ 
+.anim-hero-terminal-cursor {
+  color: var(--accent);
+  animation: tw-blink 0.8s step-end infinite;
+  margin-left: 1px;
+}
+ 
+// =========================================================
+// BOUNCE BALL (mobile — remplace 3D tilt)
+// =========================================================
+.lab-bounce-wrap {
+  display: none; // affiché en JS sur mobile
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 120px;
+  padding-bottom: 10px;
+}
+ 
+.lab-bounce-ball {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 4px 16px rgba(43, 212, 191, 0.4);
+  animation: bounce-up 0.7s cubic-bezier(0.33, 0, 0.66, 0) infinite alternate;
+}
+ 
+.lab-bounce-shadow {
+  width: 28px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(43, 212, 191, 0.25);
+  margin-top: 6px;
+  animation: bounce-shadow 0.7s cubic-bezier(0.33, 0, 0.66, 0) infinite alternate;
+}
+ 
+@keyframes bounce-up {
+  from {
+    transform: translateY(0) scale(1, 1);
+  }
+  to {
+    transform: translateY(-55px) scale(0.95, 1.05);
+  }
+}
+ 
+@keyframes bounce-shadow {
+  from {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  to {
+    transform: scale(0.55);
+    opacity: 0.1;
+  }
+}
+ 
+// =========================================================
+// SECTION HERO — gap réduit
+// =========================================================
+.section-shell--hero-anim {
+  padding-bottom: 1.5rem;
+}
+ 
+// =========================================================
+// NEON PULSE (mobile — remplace glitch)
+// =========================================================
+.lab-neon-pulse {
+  display: none; // affiché en JS sur mobile
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-0);
+  user-select: none;
+  animation: neon-cycle 3s ease-in-out infinite;
+}
+ 
+@keyframes neon-cycle {
+  0% {
+    text-shadow:
+      0 0 8px rgba(43, 212, 191, 0.9),
+      0 0 20px rgba(43, 212, 191, 0.6),
+      0 0 40px rgba(43, 212, 191, 0.3);
+    color: #fff;
+  }
+  33% {
+    text-shadow:
+      0 0 8px rgba(79, 124, 255, 0.9),
+      0 0 20px rgba(79, 124, 255, 0.6),
+      0 0 40px rgba(79, 124, 255, 0.3);
+    color: #c8d8ff;
+  }
+  66% {
+    text-shadow:
+      0 0 8px rgba(250, 199, 117, 0.9),
+      0 0 20px rgba(250, 199, 117, 0.6),
+      0 0 40px rgba(250, 199, 117, 0.3);
+    color: #fff8e0;
+  }
+  100% {
+    text-shadow:
+      0 0 8px rgba(43, 212, 191, 0.9),
+      0 0 20px rgba(43, 212, 191, 0.6),
+      0 0 40px rgba(43, 212, 191, 0.3);
+    color: #fff;
+  }
+}

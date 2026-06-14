@@ -1,6 +1,6 @@
 <?php
 /**
- * Page detail d'un projet.
+ * Page détail d'un projet.
  */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -10,46 +10,62 @@ get_header();
 ?>
 
 <main id="main" class="site-main">
-    <section class="portfolio-section">
+    <?php while ( have_posts() ) : the_post();
+
+        $context   = get_post_meta( get_the_ID(), '_portfolio_project_context', true );
+        $code_link = get_post_meta( get_the_ID(), '_portfolio_project_code_link', true );
+        $site_link = get_post_meta( get_the_ID(), '_portfolio_project_site_link', true );
+    ?>
+
+    <?php if ( has_post_thumbnail() ) : ?>
+    <div class="single-projet-hero">
+        <?php the_post_thumbnail( 'full' ); ?>
+        <div class="single-projet-hero-overlay"></div>
+    </div>
+    <?php endif; ?>
+
+    <section class="section-shell">
         <div class="container">
-            <?php
-            while ( have_posts() ) :
-                the_post();
-                $context   = get_post_meta( get_the_ID(), '_portfolio_project_context', true );
-                $code_link = get_post_meta( get_the_ID(), '_portfolio_project_code_link', true );
-                $site_link = get_post_meta( get_the_ID(), '_portfolio_project_site_link', true );
-                ?>
-                <article class="portfolio-single-project">
-                    <header class="portfolio-single-header">
-                        <h1 class="portfolio-page-title"><?php the_title(); ?></h1>
-                        <?php if ( $context ) : ?>
-                            <p class="portfolio-project-context"><?php echo esc_html( $context ); ?></p>
-                        <?php endif; ?>
-                    </header>
+            <div class="single-projet-wrap">
 
-                    <?php if ( has_post_thumbnail() ) : ?>
-                        <div class="portfolio-single-thumb">
-                            <?php the_post_thumbnail( 'large' ); ?>
-                        </div>
+                <header class="single-projet-header">
+                    <?php if ( $context ) : ?>
+                        <span class="single-projet-badge"><?php echo esc_html( $context ); ?></span>
                     <?php endif; ?>
+                    <h1 class="single-projet-title"><?php the_title(); ?></h1>
+                </header>
 
-                    <div class="portfolio-single-content">
-                        <?php the_content(); ?>
-                    </div>
+                <div class="single-projet-actions">
+                    <?php if ( $site_link ) : ?>
+                        <a href="<?php echo esc_url( $site_link ); ?>" target="_blank" rel="noopener noreferrer" class="portfolio-primary-btn">
+                            Voir le site →
+                        </a>
+                    <?php endif; ?>
+                    <?php if ( $code_link ) : ?>
+                        <a href="<?php echo esc_url( $code_link ); ?>" target="_blank" rel="noopener noreferrer" class="portfolio-secondary-btn">
+                            Voir le code
+                        </a>
+                    <?php endif; ?>
+                    <a href="<?php echo esc_url( get_post_type_archive_link( 'projet' ) ); ?>" class="single-projet-back">
+                        ← Retour aux projets
+                    </a>
+                </div>
 
-                    <div class="portfolio-project-links">
-                        <?php if ( $code_link ) : ?>
-                            <a href="<?php echo esc_url( $code_link ); ?>" target="_blank" rel="noopener noreferrer">Voir le code</a>
-                        <?php endif; ?>
-                        <?php if ( $site_link ) : ?>
-                            <a href="<?php echo esc_url( $site_link ); ?>" target="_blank" rel="noopener noreferrer">Voir le site</a>
-                        <?php endif; ?>
-                        <a href="<?php echo esc_url( get_post_type_archive_link( 'projet' ) ); ?>">Retour aux projets</a>
-                    </div>
-                </article>
-            <?php endwhile; ?>
+                <div class="single-projet-content">
+                    <?php the_content(); ?>
+                </div>
+
+                <div class="single-projet-footer">
+                    <a href="<?php echo esc_url( get_post_type_archive_link( 'projet' ) ); ?>" class="portfolio-secondary-btn">
+                        ← Retour aux projets
+                    </a>
+                </div>
+
+            </div>
         </div>
     </section>
+
+    <?php endwhile; ?>
 </main>
 
 <?php

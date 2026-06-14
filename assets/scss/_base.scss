@@ -3,11 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 html {
   min-height: 100%;
 }
-
+ 
 body {
   background: radial-gradient(1200px 600px at 82% -12%, rgba(43, 212, 191, 0.1), transparent 70%),
     radial-gradient(900px 500px at -8% 22%, rgba(79, 124, 255, 0.18), transparent 60%),
@@ -21,7 +21,7 @@ body {
   line-height: 1.6;
   scroll-behavior: smooth;
 }
-
+ 
 body::before {
   content: "";
   position: fixed;
@@ -33,55 +33,55 @@ body::before {
     radial-gradient(900px 420px at calc(14% + (var(--scroll-progress) * 20%)) 75%, rgba(79, 124, 255, 0.2), transparent 72%);
   transition: opacity 0.25s linear;
 }
-
+ 
 main#main,
 #elementor,
 .elementor-inner {
   flex: 1 1 auto;
 }
-
+ 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
-
+ 
 .site-main {
-  padding-top: 96px;
+  padding-top: 74px;
 }
-
+ 
 body.admin-bar .site-main {
-  padding-top: 132px;
+  padding-top: 112px;
 }
-
+ 
 .section-shell {
   padding: 4.5rem 0;
 }
-
+ 
 .section-heading {
   margin-bottom: 1.5rem;
 }
-
+ 
 .section-heading h2 {
   font-size: clamp(1.4rem, 2.2vw, 2.2rem);
   margin-bottom: 0.4rem;
 }
-
+ 
 .section-heading p {
   color: var(--text-1);
   max-width: 740px;
 }
-
+ 
 @media (max-width: 767px) {
   .container {
     padding: 0 1rem;
   }
-
+ 
   .site-main {
-    padding-top: 82px;
+    padding-top: 64px;
   }
-
+ 
   body.admin-bar .site-main {
-    padding-top: 126px;
+    padding-top: 116px;
   }
 }

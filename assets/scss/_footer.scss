@@ -1,48 +1,220 @@
+// =========================================================
+// FOOTER
+// =========================================================
 .site-footer,
 #site-footer {
   display: block !important;
   visibility: visible !important;
   margin-top: auto;
-  padding-top: 6rem;
 }
-
+ 
 .footer-main {
-  background: linear-gradient(180deg, rgba(15, 29, 47, 0.96), rgba(10, 21, 35, 0.96));
-  padding: 60px 20px;
+  background: linear-gradient(180deg, rgba(10, 20, 34, 0.98), rgba(6, 14, 24, 0.99));
+  padding: 64px 0 48px;
   border-top: 1px solid var(--line);
-  backdrop-filter: blur(8px);
 }
-
+ 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1fr;
   gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  align-items: start;
 }
-
+ 
+// — Colonne identité
+.footer-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+ 
+.footer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+ 
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: badge-pulse 2s infinite;
+  }
+}
+ 
 .footer-heading {
-  color: var(--text-0) !important;
-  margin-bottom: 1rem;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-0);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
 }
-
-.footer-desc,
-.footer-nav-list a,
+ 
+// Titres de colonnes nav/social
+.footer-nav .footer-heading,
+.footer-social .footer-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+ 
+.footer-desc {
+  font-size: 14px;
+  color: var(--text-1);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  max-width: 320px;
+}
+ 
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(43, 212, 191, 0.1);
+  border: 1px solid rgba(43, 212, 191, 0.3);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  align-self: flex-start;
+ 
+  &::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+ 
+  &:hover {
+    background: rgba(43, 212, 191, 0.18);
+    border-color: rgba(43, 212, 191, 0.55);
+ 
+    &::after {
+      transform: translateX(3px);
+    }
+  }
+}
+ 
+// — Colonne navigation
+.footer-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+ 
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+ 
+  a {
+    font-size: 14px;
+    color: var(--text-1);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 4px 0;
+ 
+    &:hover {
+      color: var(--text-0);
+    }
+  }
+}
+ 
 .footer-nav-icon {
   color: var(--text-1);
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+ 
+  li:hover & {
+    opacity: 1;
+    color: var(--accent);
+  }
 }
-
-.footer-social-link:hover,
-.site-footer a:hover {
-  color: var(--text-0);
+ 
+// — Colonne social
+.footer-social-icons {
+  display: flex;
+  gap: 10px;
 }
-
-@media (max-width: 767px) {
+ 
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-1);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+ 
+  &:hover {
+    background: rgba(43, 212, 191, 0.1);
+    border-color: rgba(43, 212, 191, 0.3);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+ 
+// — Copyright bar
+.footer-copyright {
+  background: rgba(4, 10, 18, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px 0;
+}
+ 
+.footer-copyright-text {
+  font-size: 12px;
+  color: var(--text-1);
+  opacity: 0.6;
+  margin: 0;
+}
+ 
+// — Responsive
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+ 
+  .footer-identity {
+    grid-column: 1 / -1;
+  }
+}
+ 
+@media (max-width: 600px) {
+  .footer-main {
+    padding: 48px 0 36px;
+  }
+ 
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding: 0 1rem;
+  }
+ 
+  .footer-identity {
+    grid-column: auto;
+  }
+ 
+  .footer-social-icons {
+    gap: 8px;
   }
 }

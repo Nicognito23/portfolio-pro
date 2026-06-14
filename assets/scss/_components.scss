@@ -1,3 +1,5 @@
+@use "sass:map";
+
 .portfolio-primary-btn,
 .portfolio-secondary-btn {
   display: inline-flex;
@@ -31,12 +33,428 @@
   border-color: var(--accent);
 }
 
-.portfolio-quote-form-wrap,
 .portfolio-project-card,
 .portfolio-single-project {
   border: 1px solid var(--line);
   background: linear-gradient(180deg, var(--surface), var(--surface-2));
   box-shadow: var(--shadow);
+}
+
+// =========================================================
+// STEPPER DEVIS
+// =========================================================
+.quote-stepper-wrap {
+  background: linear-gradient(160deg, rgba(13, 26, 43, 0.9), rgba(8, 18, 32, 0.95));
+  border: 1px solid rgba(101, 150, 214, 0.28);
+  border-radius: 22px;
+  padding: 3rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.quote-step--hidden {
+  display: none;
+}
+
+// — Stepper header
+.quote-stepper-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quote-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.quote-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-1);
+  transition: all 0.3s ease;
+}
+
+.quote-bubble--active {
+  background: rgba(43, 212, 191, 0.18);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 16px rgba(43, 212, 191, 0.25);
+}
+
+.quote-bubble--done {
+  background: rgba(43, 212, 191, 0.15);
+  border-color: rgba(43, 212, 191, 0.6);
+  color: var(--accent);
+}
+
+.quote-step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-0);
+  white-space: nowrap;
+}
+
+.quote-step-label--muted {
+  color: var(--text-1);
+  font-weight: 400;
+}
+
+.quote-connector {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 12px;
+  min-width: 24px;
+}
+
+.quote-connector--done {
+  background: linear-gradient(90deg, var(--accent), rgba(43, 212, 191, 0.4));
+  opacity: 1;
+}
+
+// — Titre d'étape
+.quote-step-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-0);
+  margin: 0 0 1.75rem;
+}
+
+// — Type cards grille
+.quote-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+
+// Couleurs par type de card
+// Couleurs par card — syntaxe map moderne (clé: (accent, bg))
+$card-colors: (
+  1: ("accent": #2bd4bf, "bg": rgba(43, 212, 191, 0.12)),   // cyan — vitrine
+  2: ("accent": #4f7cff, "bg": rgba(79, 124, 255, 0.12)),   // bleu — refonte
+  3: ("accent": #fac775, "bg": rgba(250, 199, 117, 0.12)),  // amber — e-commerce
+  4: ("accent": #2bd4bf, "bg": rgba(43, 212, 191, 0.12)),   // cyan — SEO
+  5: ("accent": #5dcaa5, "bg": rgba(93, 202, 165, 0.12)),   // vert — maintenance
+  6: ("accent": #b3c3d7, "bg": rgba(179, 195, 215, 0.08))   // gris — autre
+);
+
+@each $n, $map in $card-colors {
+  $accent: map.get($map, "accent");
+  $bg:     map.get($map, "bg");
+
+  .quote-type-card:nth-child(#{$n}) {
+    .quote-type-icon { color: $accent; }
+
+    &:hover {
+      border-color: rgba($accent, 0.5);
+      background: $bg;
+    }
+
+    &.is-selected {
+      border-color: $accent;
+      background: $bg;
+      box-shadow: 0 0 20px rgba($accent, 0.12);
+
+      .quote-type-icon {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.quote-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.quote-type-icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.quote-type-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-0);
+  margin: 0;
+}
+
+.quote-type-sub {
+  font-size: 12px;
+  color: var(--text-1);
+  line-height: 1.45;
+}
+
+// — Pills budget
+.quote-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.quote-pill {
+  padding: 9px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-1);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba(43, 212, 191, 0.4);
+    color: var(--text-0);
+    transform: translateY(-1px);
+  }
+
+  &.is-selected {
+    border-color: var(--accent);
+    background: rgba(43, 212, 191, 0.12);
+    color: var(--accent);
+    font-weight: 600;
+  }
+}
+
+// — Champs texte
+.quote-field-group {
+  margin-bottom: 1.4rem;
+}
+
+.quote-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.quote-required {
+  color: var(--accent);
+}
+
+.quote-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--text-0);
+  font-family: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: var(--text-1);
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(43, 212, 191, 0.6);
+    background: rgba(43, 212, 191, 0.04);
+    box-shadow: 0 0 0 3px rgba(43, 212, 191, 0.08);
+  }
+}
+
+.quote-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.quote-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+// — Récapitulatif étape 3
+.quote-recap {
+  background: rgba(43, 212, 191, 0.04);
+  border: 1px solid rgba(43, 212, 191, 0.15);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 1.5rem;
+}
+
+.quote-recap-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 12px;
+}
+
+.quote-recap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 13px;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.quote-recap-key {
+  color: var(--text-1);
+}
+
+.quote-recap-val {
+  color: var(--text-0);
+  font-weight: 600;
+  text-align: right;
+  max-width: 60%;
+}
+
+// — Actions (boutons navigation)
+.quote-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quote-actions--right {
+  @extend .quote-actions;
+  justify-content: flex-end;
+}
+
+.quote-btn-back {
+  background: none;
+  border: none;
+  color: var(--text-1);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--text-0);
+  }
+}
+
+.quote-btn-next {
+  // hérite de .portfolio-primary-btn
+}
+
+// — Succès
+.quote-success {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  .quote-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(43, 212, 191, 0.15);
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    color: var(--accent);
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-0);
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    color: var(--text-1);
+    font-size: 15px;
+    margin: 0;
+  }
+}
+
+// — Feedback erreur
+.quote-feedback--error {
+  background: rgba(255, 80, 80, 0.1);
+  border: 1px solid rgba(255, 80, 80, 0.25);
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: #ff8080;
+  font-size: 14px;
+  margin-bottom: 1.5rem;
+}
+
+// — Responsive
+@media (max-width: 767px) {
+  .quote-stepper-wrap {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .quote-type-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quote-row-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-stepper-header {
+    .quote-step-label {
+      display: none;
+    }
+    .quote-step-label.quote-step-label:not(.quote-step-label--muted) {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .quote-type-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 a,
